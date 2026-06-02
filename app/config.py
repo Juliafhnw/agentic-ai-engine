@@ -41,7 +41,7 @@ GOOGLE_CLOUD_LOCATION: str = os.getenv("GOOGLE_CLOUD_LOCATION", "europe-north1")
 GOOGLE_CLOUD_STORAGE_BUCKET: str = os.getenv("GOOGLE_CLOUD_STORAGE_BUCKET", "agentic-ai-eng-bucket")
 
 # Default agent to use when a connection starts
-DEFAULT_AGENT_ID: str = os.getenv("DEFAULT_AGENT_ID", "greeting_agent")
+DEFAULT_AGENT_ID: str = os.getenv("DEFAULT_AGENT_ID", "summarizer_agent")
 
 # Default LLM model for agents
 DEFAULT_LLM_MODEL: str = os.getenv("DEFAULT_LLM_MODEL", "gemini-2.5-flash")
