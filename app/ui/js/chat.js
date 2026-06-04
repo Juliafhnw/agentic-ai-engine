@@ -1,11 +1,3 @@
-/**
- * Chat application – client-side logic.
- *
- * Manages WebSocket communication, agent selection sidebar,
- * and the chat message stream.
- */
-
-// ── DOM references ──────────────────────────────────────────
 const chatContainer = document.getElementById("chat-container");
 const userInput     = document.getElementById("user-input");
 const sendBtn       = document.getElementById("send-btn");
@@ -34,7 +26,7 @@ const ragGcsInput     = document.getElementById("rag-gcs-input");
 
 // ── State ───────────────────────────────────────────────────
 let ws = null;
-let currentAgentBubble = null;
+let currentAgentAuthor = null;
 let selectedAgentId = null;
 let agents = [];
 let pendingFiles = [];  // { name, size, base64, mime }
@@ -313,7 +305,6 @@ function selectAgent(agentId) {
 
   pendingAgentSwitch = true;
   ws.send(JSON.stringify({ action: "select_agent", agent_id: agentId }));
-  // Server confirms via agent_ready before we highlight
 
   sidebar.classList.remove("open");
   overlay.classList.remove("visible");
@@ -322,7 +313,6 @@ function selectAgent(agentId) {
 // ── WebSocket connection ────────────────────────────────────
 
 function connect() {
-  // Guard: don't open a new socket if one is already connecting or open
   if (ws && (ws.readyState === WebSocket.CONNECTING || ws.readyState === WebSocket.OPEN)) {
     return;
   }
@@ -365,7 +355,6 @@ function connect() {
 // ── Handle messages from server ─────────────────────────────
 
 function handleServerMessage(data) {
-  // Agent switched confirmation
   if (data.type === "agent_ready") {
     highlightAgent(data.agent_id);
     if (data.session_id) {
@@ -373,7 +362,6 @@ function handleServerMessage(data) {
       sessionIdEl.title = data.session_id;
     }
 
-    // On first connect, silently prompt the greeting agent for a hello
     if (isFirstConnect) {
       isFirstConnect = false;
       typingEl.classList.add("visible");
@@ -383,7 +371,6 @@ function handleServerMessage(data) {
       return;
     }
 
-    // User-initiated agent switch: show notification and prompt intro
     if (pendingAgentSwitch) {
       pendingAgentSwitch = false;
       var agentMeta = agents.find(function (a) { return a.id === data.agent_id; });
@@ -397,13 +384,13 @@ function handleServerMessage(data) {
       return;
     }
 
-    // Silent reconnect: don't show "Switched to" or re-greet
     return;
   }
 
   if (data.type === "done") {
     typingEl.classList.remove("visible");
-    currentAgentBubble = null;
+    currentAgentBubble = null; 
+    currentAgentAuthor = null;
     sendBtn.disabled = false;
     userInput.disabled = false;
     userInput.focus();
@@ -421,7 +408,7 @@ function handleServerMessage(data) {
   if (data.type === "error") {
     appendMessage("error", "System", data.content);
     typingEl.classList.remove("visible");
-    currentAgentBubble = null;
+    currentAgentAuthor = null;
     sendBtn.disabled = false;
     userInput.disabled = false;
     return;
@@ -430,7 +417,8 @@ function handleServerMessage(data) {
   // partial or final – stream into the agent bubble
   typingEl.classList.remove("visible");
 
-  if (!currentAgentBubble) {
+  if (!currentAgentBubble || currentAgentAuthor !== data.author) {
+    currentAgentAuthor = data.author;
     currentAgentBubble = appendMessage("agent", friendlyAgentName(data.author), data.content, data.author);
   } else {
     var contentNode = currentAgentBubble.querySelector(".content");

@@ -1,4 +1,7 @@
+import asyncio
 from google.adk.agents import LlmAgent
+from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
+from app import config
 
 SUMMARIZER_INSTRUCTION = """
 You are an expert summarizer agent. Your job is to create clear, concise and
@@ -11,13 +14,22 @@ When summarizing:
 - Adapt the length of the summary to the length of the input
 
 If the user provides a file attachment, summarize its content.
-If the user sends a message without any text or file to summarize,
-ask them politely to provide a text or upload a document.
+If the user provides a URL, use the fetch_url tool to fetch the page and summarize it.
+If the user sends a message without any text, file or URL to summarize,
+ask them politely to provide a text, upload a document, or share a URL.
 """
+
+mcp_toolset = MCPToolset(
+    connection_params=StdioServerParameters(
+        command="docker",
+        args=["run", "--rm", "-i", "fetch-url-mcp"],
+    )
+)
 
 summarizer_agent = LlmAgent(
     name="summarizer_agent",
-    description="Summarizes texts and documents provided by the user.",
-    model="gemini-2.5-flash",
+    description="Summarizes texts, documents and web pages provided by the user.",
+    model=config.DEFAULT_LLM_MODEL,
     instruction=SUMMARIZER_INSTRUCTION,
+    tools=[mcp_toolset],
 )

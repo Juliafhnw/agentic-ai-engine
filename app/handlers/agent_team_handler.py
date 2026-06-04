@@ -203,6 +203,7 @@ class AgentTeamHandler:
                     text = "".join(
                         part.text for part in event.content.parts if part.text
                     )
+                    logger.info("Agent event", author=event.author, is_final=event.is_final_response(), has_text=bool(text))
                     if text:
                         yield {
                             "type": "final" if event.is_final_response() else "partial",
