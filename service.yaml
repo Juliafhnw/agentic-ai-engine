@@ -24,8 +24,18 @@ spec:
               value: europe-north1
             - name: GOOGLE_CLOUD_STORAGE_BUCKET
               value: bucket-agentic-ai-engineering
+            - name: GOOGLE_GENAI_USE_VERTEXAI
+              value: "TRUE"
+            - name: DEFAULT_AGENT_ID
+              value: greeting_agent
+            - name: DEFAULT_LLM_MODEL
+              value: gemini-2.5-flash
             - name: SESSION_BACKEND
               value: VERTEX
+            - name: MEMORY_BANK_LOCATION
+              value: us-central1
+            - name: CRITIQUE_AGENT_URL
+              value: https://juxlia-critique-agent.hf.space
           resources:
             limits:
               cpu: "2"
