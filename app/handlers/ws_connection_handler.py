@@ -2,7 +2,7 @@
 
 import base64
 import json
-
+from app import config
 import structlog
 from fastapi import WebSocket, WebSocketDisconnect
 
@@ -95,7 +95,31 @@ class WebSocketConnectionHandler:
                 pass
         finally:
             self._active_connections.pop(connection_id, None)
+            await self._save_session_to_memory(handler)
 
+    async def _save_session_to_memory(self, handler: AgentTeamHandler) -> None:
+        from app.context.memory.memory_bank_handler import memory_bank_handler
+        from app.handlers.agent_team_app import create_agent_app
+        from app.agent_repo import get_agent
+
+        if not handler.session_id or not handler.agent_id:
+            return
+        if memory_bank_handler.service is None:
+            return
+        try:
+            agent = get_agent(handler.agent_id)
+            agent_app = create_agent_app(agent)
+            session = await handler._session_handler.service.get_session(
+                app_name=agent_app.name,
+                user_id=config.USER_ID,
+                session_id=handler.session_id,
+            )
+            if session:
+                await memory_bank_handler.service.add_session_to_memory(session=session)
+                logger.info("Session saved to memory bank", agent_id=handler.agent_id, session_id=handler.session_id)
+        except Exception as e:
+            logger.warning("Failed to save session to memory bank", error=str(e))
+        
     async def _handle_select_agent(
         self,
         ws: WebSocket,

@@ -23,11 +23,14 @@ summarizer_agent = LlmAgent(
     output_key="raw_summary",
 )
 
+from app.context.artifacts.artifact_tools import save_artifact, load_artifact, list_artifacts
+
 formatter_agent = LlmAgent(
     name="formatter_agent",
-    description="Formats a summary into a beautiful Markdown document.",
+    description="Formats a summary into a beautiful Markdown document and saves it as artifact.",
     model=config.DEFAULT_LLM_MODEL,
-    instruction=FORMATTER_INSTRUCTION,
+    instruction=FORMATTER_INSTRUCTION + "\n\nAfter formatting, automatically save the result as 'summary.md' using the save_artifact tool.",
+    tools=[save_artifact, load_artifact, list_artifacts],
 )
 
 

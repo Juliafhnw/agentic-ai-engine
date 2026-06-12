@@ -1,7 +1,16 @@
-import asyncio
+"""Summarizer agent – summarizes texts, documents and web pages."""
+
 from google.adk.agents import LlmAgent
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
 from app import config
+from app.context.artifacts.artifact_tools import save_artifact, load_artifact, list_artifacts
+from app.context.rag.rag_tool import search_rag_corpus
+
+try:
+    from google.adk.tools import preload_memory, load_memory
+    _MEMORY_TOOLS = [preload_memory, load_memory]
+except ImportError:
+    _MEMORY_TOOLS = []
 
 SUMMARIZER_INSTRUCTION = """
 You are an expert summarizer agent. Your job is to create clear, concise and
@@ -17,6 +26,11 @@ If the user provides a file attachment, summarize its content.
 If the user provides a URL, use the fetch_url tool to fetch the page and summarize it.
 If the user sends a message without any text, file or URL to summarize,
 ask them politely to provide a text, upload a document, or share a URL.
+
+At the start of each conversation, use preload_memory to load any relevant memories
+about the user or previous sessions.
+
+You can save summaries as artifacts using the save_artifact tool.
 """
 
 mcp_toolset = MCPToolset(
@@ -31,5 +45,5 @@ summarizer_agent = LlmAgent(
     description="Summarizes texts, documents and web pages provided by the user.",
     model=config.DEFAULT_LLM_MODEL,
     instruction=SUMMARIZER_INSTRUCTION,
-    tools=[mcp_toolset],
-)
+    tools=[mcp_toolset, *_MEMORY_TOOLS, save_artifact, load_artifact, list_artifacts, search_rag_corpus], 
+    )

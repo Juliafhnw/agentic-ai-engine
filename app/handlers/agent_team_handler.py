@@ -198,7 +198,8 @@ class AgentTeamHandler:
                 session_id=self.session_id,
                 new_message=user_message,
             ):
-                # Extract text from event content parts
+                if hasattr(event, 'actions') and event.actions and hasattr(event.actions, 'state_delta') and event.actions.state_delta:
+                    logger.info("State delta", author=event.author, state_delta=dict(event.actions.state_delta))
                 if event.content and event.content.parts:
                     text = "".join(
                         part.text for part in event.content.parts if part.text
@@ -210,8 +211,7 @@ class AgentTeamHandler:
                             "author": event.author or "agent",
                             "content": text,
                         }
-
         except Exception as e:
             logger.error("Streaming error", error=str(e))
             yield {"type": "error", "author": "system", "content": str(e)}
-    
+            

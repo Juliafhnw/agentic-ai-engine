@@ -14,7 +14,7 @@ from app.agent_repo.greeting_agent import greeting_agent
 from app.agent_repo.summarizer_agent import summarizer_agent
 from app.agent_repo.summarizer_team import orchestrator_agent
 
-"""
+
 from app.context.artifacts.artifact_tools import save_artifact, load_artifact, list_artifacts
 
 try:
@@ -24,7 +24,7 @@ except ImportError:
     _MEMORY_TOOLS = set()
 
 _ARTIFACT_FUNCTIONS = {save_artifact, load_artifact, list_artifacts}
-"""
+
 
 AGENT_REGISTRY: dict[str, dict] = {
     "greeting_agent": {
@@ -62,33 +62,35 @@ def list_agents() -> list[dict]:
             "label": meta["label"],
             "description": meta["description"],
             "icon": meta["icon"],
-            #"has_artifacts": has_artifact_tools(meta["agent"]),
-            #"has_memory": has_memory_tools(meta["agent"]),
-            #"has_rag": has_rag_tools(meta["agent"]),
+            "has_artifacts": has_artifact_tools(meta["agent"]),
+            "has_memory": has_memory_tools(meta["agent"]),
+            "has_rag": has_rag_tools(meta["agent"]),
         }
         for agent_id, meta in AGENT_REGISTRY.items()
     ]
 
-# def has_artifact_tools(agent: LlmAgent) -> bool:
-#     """Check whether *agent* has any of the artifact tool functions."""
-#     for tool in agent.tools or []:
-#         func = getattr(tool, "func", tool)
-#         if func in _ARTIFACT_FUNCTIONS:
-#             return True
-#     return False
-#
-#
-# def has_memory_tools(agent: LlmAgent) -> bool:
-#     """Check whether *agent* has any memory tools (preload or load)."""
-#     for tool in agent.tools or []:
-#         if tool in _MEMORY_TOOLS:
-#             return True
-#     return False
-#
-#
-# def has_rag_tools(agent: LlmAgent) -> bool:
-#     """Check whether *agent* has a RAG retrieval AgentTool."""
-#     for tool in agent.tools or []:
-#         if isinstance(tool, AgentTool) and getattr(tool, "name", "") == "rag_retrieval_agent":
-#             return True
-#     return False
+def has_artifact_tools(agent: LlmAgent) -> bool:
+    """Check whether *agent* has any of the artifact tool functions."""
+    tools = getattr(agent, 'tools', None) or []
+    for tool in tools:
+        func = getattr(tool, "func", tool)
+        if func in _ARTIFACT_FUNCTIONS:
+            return True
+    return False
+
+
+def has_memory_tools(agent: LlmAgent) -> bool:
+    """Check whether *agent* has any memory tools (preload or load)."""
+    tools = getattr(agent, 'tools', None) or []
+    for tool in tools:
+        if type(tool).__name__ in ('PreloadMemoryTool', 'LoadMemoryTool'):
+            return True
+    return False
+
+def has_rag_tools(agent: LlmAgent) -> bool:
+    tools = getattr(agent, 'tools', None) or []
+    for tool in tools:
+        func = getattr(tool, 'func', tool)
+        if callable(func) and getattr(func, '__name__', '') == 'search_rag_corpus':
+            return True
+    return False
