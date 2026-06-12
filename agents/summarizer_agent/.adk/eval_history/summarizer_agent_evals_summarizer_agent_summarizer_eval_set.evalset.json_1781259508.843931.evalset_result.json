@@ -1,0 +1,479 @@
+{
+  "eval_set_result_id": "summarizer_agent_evals/summarizer_agent/summarizer_eval_set.evalset.json_1781259508.843931",
+  "eval_set_result_name": "summarizer_agent_evals_summarizer_agent_summarizer_eval_set.evalset.json_1781259508.843931",
+  "eval_set_id": "evals/summarizer_agent/summarizer_eval_set.evalset.json",
+  "eval_case_results": [
+    {
+      "eval_set_file": "evals/summarizer_agent/summarizer_eval_set.evalset.json",
+      "eval_set_id": "evals/summarizer_agent/summarizer_eval_set.evalset.json",
+      "eval_id": "simple_text_summary",
+      "final_eval_status": 2,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [
+        {
+          "metric_name": "tool_trajectory_avg_score",
+          "threshold": 1.0,
+          "criterion": {
+            "threshold": 1.0
+          },
+          "custom_function_path": null,
+          "score": 1.0,
+          "eval_status": 1,
+          "details": {
+            "rubric_scores": null
+          }
+        },
+        {
+          "metric_name": "response_match_score",
+          "threshold": 0.8,
+          "criterion": {
+            "threshold": 0.8
+          },
+          "custom_function_path": null,
+          "score": 0.38235294117647056,
+          "eval_status": 2,
+          "details": {
+            "rubric_scores": null
+          }
+        }
+      ],
+      "eval_metric_result_per_invocation": [
+        {
+          "actual_invocation": {
+            "invocation_id": "e-297cef17-8e17-45bc-ac72-1511ea5aff73",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Please summarize the following text: Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Artificial intelligence (AI) is the demonstration of intelligence by machines, contrasting with the natural intelligence found in humans and animals. It is a field dedicated to studying intelligent agents that perceive their environment and act to achieve their goals.\n\nKey Points:\n*   **Definition of AI**: Intelligence exhibited by machines.\n*   **Contrast with Natural Intelligence**: Different from the intelligence displayed by animals, including humans.\n*   **AI Research Focus**: The study of \"intelligent agents.\"\n*   **Intelligent Agent Characteristics**: Systems that perceive their surroundings and take actions to maximize goal achievement.\n\nIn essence, AI is about engineering systems that can think and act rationally to accomplish tasks within their environment.",
+                  "thought": null,
+                  "thought_signature": "CrACAY89a18T9vHcZUsf-Rs0wEmP01SAxQb4zmeqdvEJBv4r3wt3R_PKl3NbIu8QvC-JHg6vfHAc0eJrxaXhAjtT2HlaNOapv4iFtPzgknAvzb3lZh1JoRpHZpntLBJsvHF32YaokfuPKbHDVbdUjw5xxEav3pRg05hCXnKkpJn_O-bipH_8hosMSHtpq07ai7pM3_b47MrR2upMeMopHzRx_D4hiFvWfVq9uygUEinAoWAxdE2Q0SskTjVISj55lNanH36VrCJFMuYF9uf8oYz81GMkm89EZEiAvw3BKN2VyU80cPkaidDklfnuygeA9QZmCwbkiX7KeNmMMdqanIJln7n8J8MDwvwby7NCSzRDqoCc3Nx-CPdhG9uXOaAcpAAAdGrULzkJdZXo6fw-YM8IXg==",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "intermediate_data": {
+              "invocation_events": []
+            },
+            "creation_timestamp": 1781259508.836979,
+            "rubrics": null,
+            "app_details": {
+              "agent_details": {
+                "summarizer_agent": {
+                  "name": "summarizer_agent",
+                  "instructions": "\nYou are an expert summarizer agent. Your job is to create clear, concise and\nwell-structured summaries of any text or document the user provides.\n\nWhen summarizing:\n- Start with a 1-2 sentence overview of the main topic\n- Extract the key points as a structured list\n- End with a brief conclusion or takeaway\n\nIf the user provides a URL, use the fetch_url tool to fetch the page and summarize it.\n\n\nYou are an agent. Your internal name is \"summarizer_agent\". The description about you is \"Summarizes texts, documents and web pages provided by the user.\".",
+                  "tool_declarations": [
+                    {
+                      "retrieval": null,
+                      "computer_use": null,
+                      "file_search": null,
+                      "google_search": null,
+                      "google_maps": null,
+                      "code_execution": null,
+                      "enterprise_web_search": null,
+                      "function_declarations": [
+                        {
+                          "description": "Fetch the content of a web page.",
+                          "name": "fetch_url",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "url": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": null,
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": null,
+                                "property_ordering": null,
+                                "required": null,
+                                "title": null,
+                                "type": "STRING"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "url"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        }
+                      ],
+                      "google_search_retrieval": null,
+                      "parallel_ai_search": null,
+                      "url_context": null,
+                      "mcp_servers": null
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "expected_invocation": {
+            "invocation_id": "41369dd5-e398-4574-b8aa-d1cc1893235d",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Please summarize the following text: Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Artificial intelligence (AI) refers to intelligence demonstrated by machines rather than natural intelligence shown by animals or humans. It focuses on intelligent agents that perceive their environment and act to achieve their goals.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "intermediate_data": {
+              "tool_uses": [],
+              "tool_responses": [],
+              "intermediate_responses": []
+            },
+            "creation_timestamp": 1781259505.56045,
+            "rubrics": null,
+            "app_details": null
+          },
+          "eval_metric_results": [
+            {
+              "metric_name": "tool_trajectory_avg_score",
+              "threshold": 1.0,
+              "criterion": {
+                "threshold": 1.0
+              },
+              "custom_function_path": null,
+              "score": 1.0,
+              "eval_status": 1,
+              "details": {
+                "rubric_scores": null
+              }
+            },
+            {
+              "metric_name": "response_match_score",
+              "threshold": 0.8,
+              "criterion": {
+                "threshold": 0.8
+              },
+              "custom_function_path": null,
+              "score": 0.38235294117647056,
+              "eval_status": 2,
+              "details": {
+                "rubric_scores": null
+              }
+            }
+          ]
+        }
+      ],
+      "session_id": "___eval___session___fcdc889e-b79c-46b3-8df2-67518a7b5c02",
+      "session_details": {
+        "id": "___eval___session___fcdc889e-b79c-46b3-8df2-67518a7b5c02",
+        "app_name": "summarizer_agent",
+        "user_id": "user",
+        "state": {
+          "__llm_request_key__": "2dd78dd6-9f10-4638-9f87-108aa418c910"
+        },
+        "events": [
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Please summarize the following text: Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-297cef17-8e17-45bc-ac72-1511ea5aff73",
+            "author": "user",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {},
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "route": null,
+              "request_task": null,
+              "finish_task": null,
+              "render_ui_widgets": null,
+              "set_model_response": null
+            },
+            "output": null,
+            "node_info": {
+              "path": "",
+              "output_for": null,
+              "message_as_output": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "406c33b6-09e0-41f7-b1c4-2e2279169c62",
+            "timestamp": 1781259505.561727
+          },
+          {
+            "model_version": "gemini-2.5-flash",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Artificial intelligence (AI) is the demonstration of intelligence by machines, contrasting with the natural intelligence found in humans and animals. It is a field dedicated to studying intelligent agents that perceive their environment and act to achieve their goals.\n\nKey Points:\n*   **Definition of AI**: Intelligence exhibited by machines.\n*   **Contrast with Natural Intelligence**: Different from the intelligence displayed by animals, including humans.\n*   **AI Research Focus**: The study of \"intelligent agents.\"\n*   **Intelligent Agent Characteristics**: Systems that perceive their surroundings and take actions to maximize goal achievement.\n\nIn essence, AI is about engineering systems that can think and act rationally to accomplish tasks within their environment.",
+                  "thought": null,
+                  "thought_signature": "CrACAY89a18T9vHcZUsf-Rs0wEmP01SAxQb4zmeqdvEJBv4r3wt3R_PKl3NbIu8QvC-JHg6vfHAc0eJrxaXhAjtT2HlaNOapv4iFtPzgknAvzb3lZh1JoRpHZpntLBJsvHF32YaokfuPKbHDVbdUjw5xxEav3pRg05hCXnKkpJn_O-bipH_8hosMSHtpq07ai7pM3_b47MrR2upMeMopHzRx_D4hiFvWfVq9uygUEinAoWAxdE2Q0SskTjVISj55lNanH36VrCJFMuYF9uf8oYz81GMkm89EZEiAvw3BKN2VyU80cPkaidDklfnuygeA9QZmCwbkiX7KeNmMMdqanIJln7n8J8MDwvwby7NCSzRDqoCc3Nx-CPdhG9uXOaAcpAAAdGrULzkJdZXo6fw-YM8IXg==",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "2dd78dd6-9f10-4638-9f87-108aa418c910"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 140,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 140
+                }
+              ],
+              "prompt_token_count": 207,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 207
+                }
+              ],
+              "thoughts_token_count": 55,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 402,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": -0.3259810856410435,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-297cef17-8e17-45bc-ac72-1511ea5aff73",
+            "author": "summarizer_agent",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "2dd78dd6-9f10-4638-9f87-108aa418c910"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "route": null,
+              "request_task": null,
+              "finish_task": null,
+              "render_ui_widgets": null,
+              "set_model_response": null
+            },
+            "output": null,
+            "node_info": {
+              "path": "summarizer_agent@1",
+              "output_for": null,
+              "message_as_output": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "18f8925f-c7de-4f44-b4fb-1d8926868f3c",
+            "timestamp": 1781259505.562879
+          }
+        ],
+        "last_update_time": 1781259505.562879
+      },
+      "user_id": "user"
+    }
+  ],
+  "creation_timestamp": 1781259508.843931
+}

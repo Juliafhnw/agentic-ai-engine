@@ -1,0 +1,43 @@
+{
+  "name": "summarizer_agent_eval_set",
+  "description": "Evaluation cases for the summarizer agent",
+  "eval_cases": [
+    {
+      "name": "simple_text_summary",
+      "conversation": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "Please summarize the following text: Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals."
+            }
+          ]
+        }
+      ],
+      "expected_tool_use": [],
+      "reference_final_response": "Artificial intelligence (AI) refers to intelligence demonstrated by machines rather than natural intelligence shown by animals or humans. It focuses on intelligent agents that perceive their environment and act to achieve their goals."
+    },
+    {
+      "name": "url_summary_request",
+      "conversation": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "Summarize this URL: https://google.github.io/adk-docs/"
+            }
+          ]
+        }
+      ],
+      "expected_tool_use": [
+        {
+          "tool_name": "fetch_url",
+          "tool_input": {
+            "url": "https://google.github.io/adk-docs/"
+          }
+        }
+      ],
+      "reference_final_response": "The ADK documentation page provides information about Google's Agent Development Kit."
+    }
+  ]
+}

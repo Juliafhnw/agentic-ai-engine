@@ -1,0 +1,18 @@
+[
+  {
+    "name": "simple_text_summary",
+    "data": [
+      {
+        "query": "Please summarize the following text: Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.",
+        "expected_tool_use": [],
+        "expected_intermediate_agent_responses": [],
+        "reference": "Artificial intelligence (AI) is the demonstration of intelligence by machines, contrasting with natural intelligence in humans and animals. It focuses on intelligent agents that perceive their environment and take actions to maximize goal achievement."
+      }
+    ],
+    "initial_session": {
+      "state": {},
+      "app_name": "summarizer_agent",
+      "user_id": "user"
+    }
+  }
+]
