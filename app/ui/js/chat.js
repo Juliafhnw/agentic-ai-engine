@@ -373,6 +373,9 @@ function handleServerMessage(data) {
 
     if (pendingAgentSwitch) {
       pendingAgentSwitch = false;
+      currentAgentBubble = null;   
+      currentAgentAuthor = null;
+      chatContainer.innerHTML = "";
       var agentMeta = agents.find(function (a) { return a.id === data.agent_id; });
       var name = agentMeta ? agentMeta.label : data.agent_id;
       appendMessage("system", "System", "\uD83E\uDD16 Switched to " + name + " Agent");
@@ -417,6 +420,7 @@ function handleServerMessage(data) {
   // partial or final – stream into the agent bubble
   typingEl.classList.remove("visible");
 
+  console.log("Rendering message:", data.type, data.author, data.content ? data.content.slice(0, 50) : "no content");
   if (!currentAgentBubble || currentAgentAuthor !== data.author) {
     currentAgentAuthor = data.author;
     currentAgentBubble = appendMessage("agent", friendlyAgentName(data.author), data.content, data.author);

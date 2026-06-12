@@ -444,7 +444,7 @@ header .status .dot.connected { background: #22c55e; }
   padding: 6px 14px;
   border: none;
   border-radius: 8px;
-  background: var(--accent);
+  background: #16a34a !important;
   color: #fff;
   font-size: 0.82rem;
   font-weight: 600;
@@ -669,7 +669,7 @@ header .status .dot.connected { background: #22c55e; }
 
 .message.system {
   align-self: flex-end;
-  background: #16a34a;
+  background: #16a34a !important;
   color: #ffffff;
   font-size: 0.82rem;
   border-radius: 8px;
