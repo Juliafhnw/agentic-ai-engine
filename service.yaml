@@ -36,7 +36,10 @@ spec:
               value: us-central1
             - name: CRITIQUE_AGENT_URL
               value: https://juxlia-critique-agent.hf.space
+            - name: RAG_CORPUS
+              value: projects/268314383782/locations/europe-north1/ragCorpora/4611686018427387904
           resources:
             limits:
               cpu: "2"
               memory: 2Gi
+# Add this under env: in service.yaml
