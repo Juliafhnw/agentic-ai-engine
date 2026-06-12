@@ -16,6 +16,7 @@ from app.agent_repo.summarizer_team import orchestrator_agent
 
 
 from app.context.artifacts.artifact_tools import save_artifact, load_artifact, list_artifacts
+from app.agent_repo.coding_agent.agent import coding_agent
 
 try:
     from google.adk.tools import preload_memory, load_memory
@@ -44,7 +45,13 @@ AGENT_REGISTRY: dict[str, dict] = {
         "label": "Summarizer Team",
         "description": "A team of agents that fetches, summarizes and formats content.",
         "icon": "🤖",
-    }
+    },
+    "coding_agent": {
+        "agent": coding_agent,
+        "label": "Coding",
+        "description": "Investigates ADK source code and explains implementation details.",
+        "icon": "💻",
+    },
 }
 
 
