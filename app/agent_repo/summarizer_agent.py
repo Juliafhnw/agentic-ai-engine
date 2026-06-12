@@ -1,8 +1,8 @@
 """Summarizer agent – summarizes texts, documents and web pages."""
 
 from google.adk.agents import LlmAgent
-from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
 from app import config
+from app.tools.fetch_url_tool import fetch_url_tool
 from app.context.artifacts.artifact_tools import save_artifact, load_artifact, list_artifacts
 from app.context.rag.rag_tool import search_rag_corpus
 
@@ -33,17 +33,10 @@ about the user or previous sessions.
 You can save summaries as artifacts using the save_artifact tool.
 """
 
-mcp_toolset = MCPToolset(
-    connection_params=StdioServerParameters(
-        command="docker",
-        args=["run", "--rm", "-i", "fetch-url-mcp"],
-    )
-)
-
 summarizer_agent = LlmAgent(
     name="summarizer_agent",
     description="Summarizes texts, documents and web pages provided by the user.",
     model=config.DEFAULT_LLM_MODEL,
     instruction=SUMMARIZER_INSTRUCTION,
-    tools=[mcp_toolset, *_MEMORY_TOOLS, save_artifact, load_artifact, list_artifacts, search_rag_corpus], 
-    )
+    tools=[fetch_url_tool, *_MEMORY_TOOLS, save_artifact, load_artifact, list_artifacts, search_rag_corpus],
+)

@@ -1,17 +1,13 @@
+"""Summarizer agent team – sequential pipeline."""
+
 from google.adk.agents import LlmAgent, SequentialAgent
-from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
 from app import config
+from app.tools.fetch_url_tool import fetch_url_tool
+from app.context.artifacts.artifact_tools import save_artifact, load_artifact, list_artifacts
 from app.agent_repo.summarizer_team.critique_tool import critique_tool
 from app.agent_repo.summarizer_team.prompt import (
     SUMMARIZER_INSTRUCTION,
     FORMATTER_INSTRUCTION,
-)
-
-mcp_toolset = MCPToolset(
-    connection_params=StdioServerParameters(
-        command="docker",
-        args=["run", "--rm", "-i", "fetch-url-mcp"],
-    )
 )
 
 summarizer_agent = LlmAgent(
@@ -19,20 +15,17 @@ summarizer_agent = LlmAgent(
     description="Summarizes texts, documents and web pages.",
     model=config.DEFAULT_LLM_MODEL,
     instruction=SUMMARIZER_INSTRUCTION,
-    tools=[mcp_toolset],
+    tools=[fetch_url_tool],
     output_key="raw_summary",
 )
 
-from app.context.artifacts.artifact_tools import save_artifact, load_artifact, list_artifacts
-
 formatter_agent = LlmAgent(
     name="formatter_agent",
-    description="Formats a summary into a beautiful Markdown document and saves it as artifact.",
+    description="Formats a summary into a beautiful Markdown document.",
     model=config.DEFAULT_LLM_MODEL,
-    instruction=FORMATTER_INSTRUCTION + "\n\nAfter formatting, automatically save the result as 'summary.md' using the save_artifact tool.",
+    instruction=FORMATTER_INSTRUCTION,
     tools=[save_artifact, load_artifact, list_artifacts],
 )
-
 
 critique_agent = LlmAgent(
     name="critique_agent",
